@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadlock Rank Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="app-container">
+    <header>
+        <h1>Deadlock Rank Calculator</h1>
+        <p>Estimate the wins and streak bonuses needed for your next promotion.</p>
+    </header>
+
+    <div class="card">
+        <form id="calc-form" onsubmit="return false;">
+            <div class="input-grid">
+                <div class="field-group">
+                    <label for="current-rp">Current RP</label>
+                    <input type="number" id="current-rp" name="currentRP" min="0" placeholder="e.g. 1500" value="100">
+                </div>
+
+                <div class="field-group">
+                    <label for="target-rp">RP Needed to Rank Up</label>
+                    <input type="number" id="target-rp" name="targetRP" min="1" placeholder="e.g. 2000" value="2000">
+                </div>
+
+                <div class="field-group">
+                    <label for="current-streak">Current Win Streak</label>
+                    <input type="number" id="current-streak" name="currentStreak" min="0" value="0">
+                </div>
+
+                <div class="field-group">
+                    <label for="base-rp">Base RP per Win</label>
+                    <input type="number" id="base-rp" name="baseRP" min="1" value="300">
+                </div>
+            </div>
+
+            <button type="button" id="calc-btn" class="btn-primary">Calculate Target</button>
+        </form>
+    </div>
+
+    <div id="status-banner" class="banner" role="status"></div>
+
+    <section id="results-card" class="card hidden">
+        <div class="summary-bar">
+            <span class="summary-title">Required Wins</span>
+            <span id="summary-text" class="summary-value">0 Wins</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Game</th>
+                    <th>Streak</th>
+                    <th>Base</th>
+                    <th>Bonus</th>
+                    <th>Gained</th>
+                    <th>Remaining</th>
+                </tr>
+                </thead>
+                <tbody id="breakdown-body"></tbody>
+            </table>
+        </div>
+    </section>
+
+    <p class="disclaimer">
+        Assumes a static base RP payout per match. Actual Deadlock match RP varies based on lobby MMR and individual
+        performance.
+    </p>
+</main>
+
+<template id="row-template">
+    <tr>
+        <td data-field="game"></td>
+        <td data-field="streak"></td>
+        <td data-field="base"></td>
+        <td data-field="bonus" class="bonus-col"></td>
+        <td data-field="gained"></td>
+        <td data-field="status"></td>
+    </tr>
+</template>
+
+<script src="script.js"></script>
+</body>
+</html>
